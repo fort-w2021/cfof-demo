@@ -1,6 +1,6 @@
 source("cfof.R")
 
-#' ### Generate some example data:
+#' ### Generate some diverse example data:
 
 # simple data where all points have same distance to each other
 triangle <- rbind(
@@ -8,7 +8,7 @@ triangle <- rbind(
   c(sin(2 / 3 * pi), cos(2 / 3 * pi)),
   c(sin(4 / 3 * pi), cos(4 / 3 * pi))
 )
-# plot(equitriangle)
+# plot(triangle)
 
 set.seed(1212)
 two_cluster <- rbind(
@@ -26,10 +26,11 @@ two_cluster_het <- rbind(
 )
 
 set.seed(1212)
-two_cluster_hd <- rbind(
+two_cluster_5d <- rbind(
   mvtnorm::rmvnorm(5, mean = rep(0, 20)),
   mvtnorm::rmvnorm(5, mean = rep(10, 20))
 )
+# plot(two_cluster_5d)
 
 set.seed(1337)
 outlier <- rbind(
@@ -45,9 +46,9 @@ plot(outlier)
 #' ... used during development of `count_neighborhoods`, e.g.:
 
 distance_matrix <- round(as.matrix(dist(outlier)), 3)
-count_neighborhoods(distance_matrix)
+count_neighborhoods()
 
-cfof(two_cluster_hd, ratio = c(.2, .3))
+cfof(outlier, ratio = c(.2, .3))
 
 #-------------------------------------------------------------------------------
 #' #### tooling:
@@ -83,6 +84,6 @@ plot_cfof(two_cluster_het, .02) +
 #-------------------------------------------------------------------------------
 
 #' ### missing
-#' - formal unit tests.
+#' - formal unit tests
 
 
